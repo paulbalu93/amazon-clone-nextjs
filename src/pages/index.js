@@ -9,6 +9,11 @@ export default function Home() {
 			</Head>
 
 			<Header />
+			<main>
+				{/* {Banner} */}
+
+				{/* {Feed} */}
+			</main>
 		</div>
 	);
 }
