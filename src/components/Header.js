@@ -1,11 +1,17 @@
 import Image from 'next/image';
 import { MenuIcon, SearchIcon, ShoppingCartIcon } from '@heroicons/react/outline';
+import { signIn, signOut, useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
+
 function Header() {
+	const [session, loading] = useSession();
+	const router = useRouter();
 	return (
 		<header>
 			<div className="flex items-center bg-amazon_blue p-1 flex-grow py-2 ">
 				<div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
 					<Image
+						onClick={() => router.push('/')}
 						src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
 						width={150}
 						height={40}
@@ -21,7 +27,7 @@ function Header() {
 
 				{/* {right} */}
 				<div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
-					<div className=" link">
+					<div onClick={session ? signOut : signIn} className=" link">
 						<p> Hello Paul</p>
 						<p className="font-extrabold md:text-sm">Accounts</p>
 					</div>
@@ -31,7 +37,7 @@ function Header() {
 						<p className="font-extrabold md:text-sm">Orders</p>
 					</div>
 
-					<div className=" link relative flex items-center">
+					<div onClick={() => router.push('/checkout')} className=" link relative flex items-center">
 						<span className="absolute top-0 right-0 md:right-10 h-4 w-4  bg-yellow-400 rounded-full text-center text-black font-bold ">
 							0
 						</span>
